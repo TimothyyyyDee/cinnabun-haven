@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Summary</title>
+  <style>
+    body {
+      font-family: "Courier New", Courier, monospace;
+      background-color: #f4f4f9;
+      color: #333;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      font-size: 18px;
+      color: #555;
+    }
+
+    input[type="number"], input[type="text"] {
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #output, #inventory, #stats {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      color: #333;
+    }
+
+    #chartContainer {
+      margin-top: 30px;
+    }
+
+    @media (max-width: 600px) {
+      input[type="number"], input[type="text"], button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Order Your Items</h1>
+
+  <label for="name">Name:</label>
+  <input type="text" id="name" placeholder="Enter your name" required><br>
+
+  <label for="cinnabun">Cinnabuns ($3 each):</label>
+  <input type="number" id="cinnabun" value="0" min="0"><br>
+
+  <label for="lemonade">Lemonades ($2 each):</label>
+  <input type="number" id="lemonade" value="0" min="0"><br>
+
+  <label for="pretzelBites">Pretzel Bites ($3 each):</label>
+  <input type="number" id="pretzelBites" value="0" min="0"><br>
+
+  <label for="inventoryCinnabun">Inventory for Cinnabuns:</label>
+  <input type="number" id="inventoryCinnabun" value="100" min="0"><br>
+
+  <label for="inventoryLemonade">Inventory for Lemonades:</label>
+  <input type="number" id="inventoryLemonade" value="100" min="0"><br>
+
+  <label for="inventoryPretzelBites">Inventory for Pretzel Bites:</label>
+  <input type="number" id="inventoryPretzelBites" value="100" min="0"><br>
+
+  <button onclick="startOrderTracking()">Start Tracking Orders</button>
+  <button onclick="addOrder()">Add Order</button>
+
+  <div id="output"></div>
+  <div id="inventory"></div>
+  <div id="stats"></div>
+
+  <div id="chartContainer">
+    <canvas id="orderChart"></canvas>
+  </div>
+
+  <!-- Include Chart.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    // Prices of the products
+    const prices = {
+      cinnabun: 3,
+      lemonade: 2,
+      pretzelBites: 3
+    };
+
+    // Inventory tracking
+    let inventory = {
+      cinnabun: 100,
+      lemonade: 100,
+      pretzelBites: 100
+    };
+
+    // Sales and Order Tracking
+    let totalSales = 0;
+    let totalOrders = 0;
+    let totalOrderAmount = 0;
+
+    // Initialize the chart
+    const ctx = document.getElementById('orderChart').getContext('2d');
+    const orderChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'Cost ($)',
+          data: [],
+          backgroundColor: '#4CAF50',
+          borderColor: '#4CAF50',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Generate a unique 3-digit ID
+    function generateId() {
+      return Math.floor(100 + Math.random() * 900); // Random 3-digit number
+    }
+
+    // Function to start tracking orders
+    function startOrderTracking() {
+      totalSales = 0;
+      totalOrders = 0;
+      totalOrderAmount = 0;
+      orderChart.data.labels = [];
+      orderChart.data.datasets[0].data = [];
+      orderChart.update();
+      updateStats();
+    }
+
+    // Function to update stats
+    function updateStats() {
+      const avgOrderCost = totalOrders === 0 ? 0 : totalOrderAmount / totalOrders;
+      document.getElementById("stats").textContent = `Total Sales: $${totalSales} | Average Order Cost: $${avgOrderCost.toFixed(2)}`;
+    }
+
+    // Function to add an order
+    function addOrder() {
+      const name = document.getElementById("name").value.trim();
+      if (!name) {
+        alert("Please enter your name.");
+        return;
+      }
+
+      const cinnabunQty = Number(document.getElementById("cinnabun").value);
+      const lemonadeQty = Number(document.getElementById("lemonade").value);
+      const pretzelBitesQty = Number(document.getElementById("pretzelBites").value);
+
+      if (cinnabunQty > inventory.cinnabun || lemonadeQty > inventory.lemonade || pretzelBitesQty > inventory.pretzelBites) {
+        alert("Not enough inventory for one or more items.");
+        return;
+      }
+
+      // Update inventory
+      inventory.cinnabun -= cinnabunQty;
+      inventory.lemonade -= lemonadeQty;
+      inventory.pretzelBites -= pretzelBitesQty;
+
+      const totalCinnabun = prices.cinnabun * cinnabunQty;
+      const totalLemonade = prices.lemonade * lemonadeQty;
+      const totalPretzelBites = prices.pretzelBites * pretzelBitesQty;
+      const total = totalCinnabun + totalLemonade + totalPretzelBites;
+
+      // Update total sales and orders
+      totalSales += total;
+      totalOrders++;
+      totalOrderAmount += total;
+
+      // Display the total in the output div
+      document.getElementById("output").textContent = `The total cost is $${total}`;
+      document.getElementById("inventory").textContent = `Inventory - Cinnabuns: ${inventory.cinnabun}, Lemonades: ${inventory.lemonade}, Pretzel Bites: ${inventory.pretzelBites}`;
+      
+      // Generate unique ID and add order to the chart
+      const id = generateId();
+      orderChart.data.labels.push(`Order ${id}: ${name}`);
+      orderChart.data.datasets[0].data.push(total);
+      orderChart.update();
+      
+      // Clear the input fields
+      document.getElementById("name").value = "";
+      document.getElementById("cinnabun").value = 0;
+      document.getElementById("lemonade").value = 0;
+      document.getElementById("pretzelBites").value = 0;
+      
+      // Update stats
+      updateStats();
+    }
+  </script>
+
+</body>
+</html>
