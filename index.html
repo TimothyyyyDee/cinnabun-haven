@@ -14,7 +14,7 @@
     }
 
     header {
-      background-color: #87CEEB; /* Cinnabon pink */
+      background-color: #87CEEB; /* Sky blue */
       color: white;
       padding: 20px;
       text-align: center;
@@ -31,7 +31,7 @@
     }
 
     .section-header {
-      background-color: #87CEEB;
+      background-color: #87CEEB; /* Sky blue */
       color: white;
       padding: 10px;
       text-align: center;
@@ -56,7 +56,7 @@
     }
 
     footer {
-      background-color: #87CEEB;
+      background-color: #87CEEB; /* Sky blue */
       color: white;
       text-align: center;
       padding: 10px;
@@ -70,6 +70,23 @@
         margin: 0;
         padding: 10px;
       }
+    }
+
+    .button {
+      display: block;
+      width: 200px;
+      margin: 20px auto;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #87CEEB; /* Sky blue */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background-color: #7EC8E3; /* Slightly darker sky blue */
     }
   </style>
 </head>
@@ -109,10 +126,39 @@
         <strong>Jason</strong> - Website Developer and Logistics
       </div>
       <div class="team-member">
-        <strong>Emery</strong> - Advertising and Logistics Intern
+        <strong>Emery</strong> - Advertising
       </div>
     </div>
   </section>
+
+  <section id="contact">
+    <div class="section-header">Contact Us</div>
+    <div class="section-content">
+      <p>For more information or to place a large order, please contact us:</p>
+      <p>Email: <a href="mailto:cinnabonstand@example.com">cinnabonstand@example.com</a></p>
+      <p>Phone: (123) 456-7890</p>
+    </div>
+  </section>
+
+  <button class="button" onclick="redirectToOrders()">Employee Portal</button>
+
+  <script>
+    function redirectToOrders() {
+      // Prompt for the password
+      const password = prompt("Enter the password:");
+
+      // Check if the password matches the correct one
+      const correctPassword = "yourPassword"; // Replace with your actual password
+
+      if (password === correctPassword) {
+        // Redirect to orders.html if the password is correct
+        window.location.href = "orders.html";
+      } else {
+        // Alert the user if the password is incorrect
+        alert("Incorrect password. Access denied.");
+      }
+    }
+  </script>
 
 </body>
 </html>
