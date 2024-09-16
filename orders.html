@@ -41,6 +41,11 @@
       cursor: pointer;
       font-size: 16px;
       width: 100%;
+      margin-bottom: 10px;
+    }
+
+    button.stop {
+      background-color: red;
     }
 
     button:hover {
@@ -92,7 +97,8 @@
   <input type="number" id="inventoryPretzelBites" value="100" min="0"><br>
 
   <button onclick="startOrderTracking()">Start Tracking Orders</button>
-  <button onclick="addOrder()">Add Order</button>
+  <button onclick="addOrder()" id="addOrderButton">Add Order</button>
+  <button class="stop" onclick="stopOrderTracking()">Stop Tracking Orders</button>
 
   <div id="output"></div>
   <div id="inventory"></div>
@@ -124,6 +130,7 @@
     let totalSales = 0;
     let totalOrders = 0;
     let totalOrderAmount = 0;
+    let tracking = true;
 
     // Initialize the chart
     const ctx = document.getElementById('orderChart').getContext('2d');
@@ -162,6 +169,8 @@
       orderChart.data.datasets[0].data = [];
       orderChart.update();
       updateStats();
+      tracking = true;
+      document.getElementById("addOrderButton").disabled = false;
     }
 
     // Function to update stats
@@ -170,15 +179,27 @@
       document.getElementById("stats").textContent = `Total Sales: $${totalSales} | Average Order Cost: $${avgOrderCost.toFixed(2)}`;
     }
 
+    // Function to stop tracking orders
+    function stopOrderTracking() {
+      tracking = false;
+      document.getElementById("addOrderButton").disabled = true;
+      alert("Order tracking has been stopped.");
+    }
+
     // Function to add an order
     function addOrder() {
+      if (!tracking) {
+        alert("Order tracking is stopped. Restart to add more orders.");
+        return;
+      }
+
       const name = document.getElementById("name").value.trim();
       if (!name) {
         alert("Please enter your name.");
         return;
       }
 
-      const cinnabunQty = Number(document.getElementById("cinnabun").value);
+      const cinnabunQty = Number(document.getElementById("cinnabun (value)").value);
       const lemonadeQty = Number(document.getElementById("lemonade").value);
       const pretzelBitesQty = Number(document.getElementById("pretzelBites").value);
 
