@@ -4,48 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cinnabon Stand - Entrepreneur Fair</title>
+  
+  <!-- Swiper styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+  
   <style>
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f5f5f5;
-      color: #333;
+      background-color: #f9f9f9;
+      color: black;
     }
 
     header {
-      background-color: #87CEEB; /* Sky blue */
+      background: linear-gradient(135deg, #87CEEB, #00BFFF);
       color: white;
-      padding: 20px 0;
+      padding: 20px;
       text-align: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      border-bottom: 5px solid #f0f8ff; /* Alice blue */
     }
 
     header h1 {
       margin: 0;
-      font-size: 2.5em;
+      font-size: 36px;
     }
 
-    header p {
-      margin: 5px 0 0;
-      font-size: 1.2em;
+    .swiper-container {
+      width: 100%;
+      height: 100vh; /* Adjust height as needed */
+      position: relative;
     }
 
-    section {
+    .swiper-slide {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       padding: 20px;
-      margin: 0 auto;
-      max-width: 800px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      background-color: #ffffff;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-    }
-
-    section:hover {
-      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-      transform: translateY(-5px);
+      box-sizing: border-box;
     }
 
     .section-header {
@@ -55,72 +51,51 @@
       text-align: center;
       font-size: 1.8em;
       border-radius: 8px 8px 0 0;
-      margin: 0;
-      border-bottom: 3px solid #00BBFF; /* Dodger Blue */
+      margin-bottom: 20px;
+      border-bottom: 3px solid #1E90FF; /* Dodger Blue */
+    }
+
     .section-content {
+      background-color: #ffffff;
       padding: 20px;
-    }
-
-    .section-content p {
-      line-height: 1.6;
-      margin: 10px 0;
-    }
-
-    .team-member {
-      margin-bottom: 15px;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 10px;
-      transition: background-color 0.3s ease;
-    }
-
-    .team-member:hover {
-      background-color: #f0f8ff; /* Alice Blue */
-    }
-
-    footer {
-      background-color: #87CEEB; /* Sky blue */
-      color: white;
-      text-align: center;
-      padding: 15px;
-      position: fixed;
-      bottom: 0;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      max-width: 800px; /* Adjust as needed */
       width: 100%;
-      box-shadow: 0 -4px 8px rgba(0,0,0,0.2);
-      border-top: 5px solid #f0f8ff; /* Alice blue */
     }
 
-    @media (max-width: 600px) {
-      section {
-        margin: 0;
-        padding: 10px;
-      }
+    .swiper-pagination-bullet {
+      background-color: #00BFFF;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: #00BFFF;
     }
 
     .button {
       display: block;
-      width: 220px;
+      width: 200px;
       margin: 20px auto;
-      padding: 12px;
-      font-size: 18px;
-      background-color: #00BFFF; /* Deep Sky Blue */
+      padding: 10px;
+      font-size: 16px;
+      background-color: #87CEEB; /* Sky blue */
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 5px;
       cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease;
+      text-align: center;
     }
 
     .button:hover {
       background-color: #1E90FF; /* Dodger Blue */
-      transform: scale(1.05);
     }
-      #about .section-header {
-  margin-bottom: 20px; /* Space between title and content */
-}
 
-#about .section-content {
-  padding-top: 20px; /* Extra space if needed */
-}
+    @media (max-width: 600px) {
+      .swiper-slide {
+        padding: 10px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -130,99 +105,122 @@
     <p>Delicious Cinnabons, Refreshing Lemonades, and More!</p>
   </header>
 
-  <section id="about">
-    <div class="section-header">About Us</div>
-    <div class="section-content">
-      <p>At our Cinnabon Stand, we bring you the finest and most delicious homemade Cinnabons, pretzel bites, and refreshing lemonades. Our stand is committed to providing high-quality, authentic, and freshly baked treats that will satisfy your cravings. Join us at the Entrepreneur Fair to experience our sweet offerings and learn more about our commitment to quality and customer satisfaction.</p>
-    </div>
-  </section>
+  <!-- Swiper -->
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <!-- Slide 1 -->
+      <div class="swiper-slide" id="about">
+        <div class="section-header">About Us</div>
+        <div class="section-content">
+          <p>At our Cinnabon Stand, we bring you the finest and most delicious Homemade Cinnabons, pretzel bites, and refreshing lemonades. Our stand is committed to providing high-quality, authentic and freshly baked treats that will satisfy your cravings. Join us at the Entrepreneur Fair to experience our sweet offerings and learn more about our commitment to quality and customer satisfaction.</p>
+        </div>
+      </div>
 
-  <section id="products">
-    <div class="section-header">Our Products</div>
-    <div class="section-content">
-      <p><strong>Cinnabons:</strong> Delightful cinnamon rolls that are baked to perfection and topped with our signature frosting. Price: $3 each.</p>
-      <p><strong>Lemonades:</strong> Refreshing and tangy lemonades that are perfect for quenching your thirst. Price: $2 each.</p>
-      <p><strong>Pretzel Bites:</strong> Soft and salty pretzel bites that make for a great snack. Price: $3 each.</p>
-    </div>
-  </section>
+      <!-- Slide 2 -->
+      <div class="swiper-slide" id="products">
+        <div class="section-header">Our Products</div>
+        <div class="section-content">
+          <p><strong>Cinnabuns:</strong> Delightful cinnamon rolls that are baked to perfection and topped with our signature frosting. Price: $3 each.</p>
+          <p><strong>Lemonades:</strong> Refreshing and tangy lemonades that are perfect for quenching your thirst. Price: $2 each.</p>
+          <p><strong>Pretzel Bites:</strong> Soft and salty pretzel bites that make for a great snack. Price: $3 each.</p>
+        </div>
+      </div>
 
-  <section id="team">
-    <div class="section-header">Meet Our Team</div>
-    <div class="section-content">
-      <div class="team-member">
-        <strong>Eli</strong> - Head Baker
-      </div>
-      <div class="team-member">
-        <strong>Winston</strong> - Sr. Intern Cook From Ms. Mitchell's Class
-      </div>
-      <div class="team-member">
-        <strong>Jason</strong> - Website Developer and Logistics
-      </div>
-      <div class="team-member">
-        <strong>Emery</strong> - Advertising and Logistics Intern
+      <!-- Slide 3 -->
+      <div class="swiper-slide" id="team">
+        <div class="section-header">Meet Our Team</div>
+        <div class="section-content">
+          <div class="team-member"><strong>Eli</strong> - Head Baker</div>
+          <div class="team-member"><strong>Winston</strong> - Sr. Intern Cook</div>
+          <div class="team-member"><strong>Jason</strong> - Website Developer</div>
+          <div class="team-member"><strong>Emery</strong> - Advertising Intern</div>
+        </div>
       </div>
     </div>
-  </section>
+
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+
+    <!-- Add Navigation -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var swiper = new Swiper('.swiper-container', {
+        loop: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
+    });
+  </script>
   
   <button class="button" onclick="redirectToOrders()">Employee Portal</button>
 
   <script>
-// Function to decode obfuscated strings
-function decodeString(index, offset) {
-    const stringArray = getStringArray();
-    return decodeString = function (index, offset) {
-        index = index - 0x15b;
-        let decodedString = stringArray[index];
-        return decodedString;
-    }, decodeString(index, offset);
-}
-
-// Array of obfuscated strings
-function getStringArray() {
-    return [
-        'Enter the password:', 'Incorrect password. Access denied.', 'F!7rV2@wP8sL', 'orders.html', 
-        'location', 'href', '2967980iFllcN', '1772sUaQBA', '25BqSpuf', '553rcypSV', 
-        '1157682ykdFiv', '1269688IYsTIu', '1772sUaQBA', '485606NBzNxp', '5844ikhgqW', 
-        '1689933oYwSQY', '160GfQYaI', '2774889BebRnL', '33187385pIWnnu', '1kiNRZg', 
-        '11hnHnxi', '37760hkjBGD', '1293IdhbXZ', '24iwyKnl', '2068767qorqRQ', '24iwyKnl'
-    ];
-}
-
-// Main function to handle password prompt and redirection
-function redirectToOrders() {
-    const decode = _0x5753;
-    const promptMessage = decode(0x169); // 'Enter the password:'
-    const enteredPassword = prompt(promptMessage);
-    const correctPassword = decode(0x18f); // 'F!7rV2@wP8sL'
-    
-    if (enteredPassword === correctPassword) {
-        window.location.href = decode(0x15c); // 'orders.html'
-    } else {
-        alert(decode(0x16a)); // 'Incorrect password. Access denied.'
+    // Function to decode obfuscated strings
+    function decodeString(index, offset) {
+        const stringArray = getStringArray();
+        return decodeString = function (index, offset) {
+            index = index - 0x15b;
+            let decodedString = stringArray[index];
+            return decodedString;
+        }, decodeString(index, offset);
     }
-}
 
-// Helper function to decode strings based on a numerical offset
-function _0x5753(index, offset) {
-    const stringArray = _0x402c();
-    return _0x5753 = function (index, offset) {
-        index = index - 0x186;
-        let decodedString = stringArray[index];
-        return decodedString;
-    }, _0x5753(index, offset);
-}
+    // Array of obfuscated strings
+    function getStringArray() {
+        return [
+            'Enter the password:', 'Incorrect password. Access denied.', 'F!7rV2@wP8sL', 'orders.html', 
+            'location', 'href', '2967980iFllcN', '1772sUaQBA', '25BqSpuf', '553rcypSV', 
+            '1157682ykdFiv', '1269688IYsTIu', '1772sUaQBA', '485606NBzNxp', '5844ikhgqW', 
+            '1689933oYwSQY', '160GfQYaI', '2774889BebRnL', '33187385pIWnnu', '1kiNRZg', 
+            '11hnHnxi', '37760hkjBGD', '1293IdhbXZ', '24iwyKnl', '2068767qorqRQ', '24iwyKnl'
+        ];
+    }
 
-// Function to provide the array of obfuscated strings
-function _0x402c() {
-    return [
-        '1kiNRZg', 'location', 'href', '2967980iFllcN', '25BqSpuf', '11hnHnxi', 
-        '37760hkjBGD', 'Enter the password:', 'Incorrect password. Access denied.', 
-        '1772sUaQBA', '231090rCOcxj', 'orders.html', '553rcypSV', '1293IdhbXZ', 
-        '485606NBzNxp', '2774889BebRnL', '4616820KOMNgz'
-    ];
-}
+    // Main function to handle password prompt and redirection
+    function redirectToOrders() {
+        const decode = _0x5753;
+        const promptMessage = decode(0x169); // 'Enter the password:'
+        const enteredPassword = prompt(promptMessage);
+        const correctPassword = decode(0x18f); // 'F!7rV2@wP8sL'
+        
+        if (enteredPassword === correctPassword) {
+            window.location.href = decode(0x15c); // 'orders.html'
+        } else {
+            alert(decode(0x16a)); // 'Incorrect password. Access denied.'
+        }
+    }
 
+    // Helper function to decode strings based on a numerical offset
+    function _0x5753(index, offset) {
+        const stringArray = _0x402c();
+        return _0x5753 = function (index, offset) {
+            index = index - 0x186;
+            let decodedString = stringArray[index];
+            return decodedString;
+        }, _0x5753(index, offset);
+    }
+
+    // Function to provide the array of obfuscated strings
+    function _0x402c() {
+        return [
+            '1kiNRZg', 'location', 'href', '2967980iFllcN', '25BqSpuf', '11hnHnxi', 
+            '37760hkjBGD', 'Enter the password:', 'Incorrect password. Access denied.', 
+            '1772sUaQBA', '231090rCOcxj', 'orders.html', '553rcypSV', '1293IdhbXZ', 
+            '485606NBzNxp', '2774889BebRnL', '4616820KOMNgz'
+        ];
+    }
   </script>
-
 </body>
 </html>
