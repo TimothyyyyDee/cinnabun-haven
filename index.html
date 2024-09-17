@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cinnabon Stand - Entrepreneur Fair</title>
-   <style>
+  <style>
     body {
       font-family: 'Arial', sans-serif;
       margin: 0;
@@ -18,7 +18,8 @@
       color: white;
       padding: 20px 0;
       text-align: center;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      border-bottom: 5px solid #f0f8ff; /* Alice blue */
     }
 
     header h1 {
@@ -35,20 +36,27 @@
       padding: 20px;
       margin: 0 auto;
       max-width: 800px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       background-color: #ffffff;
       border-radius: 8px;
       margin-bottom: 20px;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    section:hover {
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      transform: translateY(-5px);
     }
 
     .section-header {
-      background-color: #87CEEB; /* Sky blue */
+      background-color: #00BFFF; /* Deep Sky Blue */
       color: white;
       padding: 15px;
       text-align: center;
       font-size: 1.8em;
       border-radius: 8px 8px 0 0;
       margin: 0;
+      border-bottom: 3px solid #1E90FF; /* Dodger Blue */
     }
 
     .section-content {
@@ -62,6 +70,13 @@
 
     .team-member {
       margin-bottom: 15px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .team-member:hover {
+      background-color: #f0f8ff; /* Alice Blue */
     }
 
     footer {
@@ -72,7 +87,8 @@
       position: fixed;
       bottom: 0;
       width: 100%;
-      box-shadow: 0 -4px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 -4px 8px rgba(0,0,0,0.2);
+      border-top: 5px solid #f0f8ff; /* Alice blue */
     }
 
     @media (max-width: 600px) {
@@ -84,20 +100,21 @@
 
     .button {
       display: block;
-      width: 200px;
+      width: 220px;
       margin: 20px auto;
       padding: 12px;
       font-size: 18px;
-      background-color: #87CEEB; /* Sky blue */
+      background-color: #00BFFF; /* Deep Sky Blue */
       color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s ease, transform 0.3s ease;
     }
 
     .button:hover {
-      background-color: #7EC8E3; /* Slightly darker sky blue */
+      background-color: #1E90FF; /* Dodger Blue */
+      transform: scale(1.05);
     }
   </style>
 </head>
@@ -111,14 +128,14 @@
   <section id="about">
     <div class="section-header">About Us</div>
     <div class="section-content">
-      <p>At our Cinnabon Stand, we bring you the finest and most delicious Homemade Cinnabons, pretzel bites, and refreshing lemonades. Our stand is committed to providing high-quality, authentic and freshly baked treats that will satisfy your cravings. Join us at the Entrepreneur Fair to experience our sweet offerings and learn more about our commitment to quality and customer satisfaction.</p>
+      <p>At our Cinnabon Stand, we bring you the finest and most delicious homemade Cinnabons, pretzel bites, and refreshing lemonades. Our stand is committed to providing high-quality, authentic, and freshly baked treats that will satisfy your cravings. Join us at the Entrepreneur Fair to experience our sweet offerings and learn more about our commitment to quality and customer satisfaction.</p>
     </div>
   </section>
 
   <section id="products">
     <div class="section-header">Our Products</div>
     <div class="section-content">
-      <p><strong>Cinnabuns:</strong> Delightful cinnamon rolls that are baked to perfection and topped with our signature frosting. Price: $3 each.</p>
+      <p><strong>Cinnabons:</strong> Delightful cinnamon rolls that are baked to perfection and topped with our signature frosting. Price: $3 each.</p>
       <p><strong>Lemonades:</strong> Refreshing and tangy lemonades that are perfect for quenching your thirst. Price: $2 each.</p>
       <p><strong>Pretzel Bites:</strong> Soft and salty pretzel bites that make for a great snack. Price: $3 each.</p>
     </div>
@@ -131,7 +148,7 @@
         <strong>Eli</strong> - Head Baker
       </div>
       <div class="team-member">
-        <strong>Winston</strong> - Sr. Intern Cook From Ms. Mitchell's class
+        <strong>Winston</strong> - Sr. Intern Cook From Ms. Mitchell's Class
       </div>
       <div class="team-member">
         <strong>Jason</strong> - Website Developer and Logistics
