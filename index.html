@@ -166,59 +166,17 @@
   <button class="button" onclick="redirectToOrders()">Employee Portal</button>
 
   <script>
-    // Function to decode obfuscated strings
-    function decodeString(index, offset) {
-        const stringArray = getStringArray();
-        return decodeString = function (index, offset) {
-            index = index - 0x15b;
-            let decodedString = stringArray[index];
-            return decodedString;
-        }, decodeString(index, offset);
-    }
-
-    // Array of obfuscated strings
-    function getStringArray() {
-        return [
-            'Enter the password:', 'Incorrect password. Access denied.', 'F!7rV2@wP8sL', 'orders.html', 
-            'location', 'href', '2967980iFllcN', '1772sUaQBA', '25BqSpuf', '553rcypSV', 
-            '1157682ykdFiv', '1269688IYsTIu', '1772sUaQBA', '485606NBzNxp', '5844ikhgqW', 
-            '1689933oYwSQY', '160GfQYaI', '2774889BebRnL', '33187385pIWnnu', '1kiNRZg', 
-            '11hnHnxi', '37760hkjBGD', '1293IdhbXZ', '24iwyKnl', '2068767qorqRQ', '24iwyKnl'
-        ];
-    }
-
-    // Main function to handle password prompt and redirection
     function redirectToOrders() {
-        const decode = _0x5753;
-        const promptMessage = decode(0x169); // 'Enter the password:'
-        const enteredPassword = prompt(promptMessage);
-        const correctPassword = decode(0x18f); // 'F!7rV2@wP8sL'
+        const passwordPrompt = 'Enter the password:';
+        const correctPassword = 'F!7rV2@wP8sL';
         
-        if (enteredPassword === correctPassword) {
-            window.location.href = decode(0x15c); // 'orders.html'
+        const enteredPassword = prompt(passwordPrompt);
+    if (enteredPassword === correctPassword) {
+        localStorage.setItem('authenticated', 'true');
+        window.location.href = 'orders.html';
         } else {
-            alert(decode(0x16a)); // 'Incorrect password. Access denied.'
+            alert('Incorrect password. Access denied.');
         }
-    }
-
-    // Helper function to decode strings based on a numerical offset
-    function _0x5753(index, offset) {
-        const stringArray = _0x402c();
-        return _0x5753 = function (index, offset) {
-            index = index - 0x186;
-            let decodedString = stringArray[index];
-            return decodedString;
-        }, _0x5753(index, offset);
-    }
-
-    // Function to provide the array of obfuscated strings
-    function _0x402c() {
-        return [
-            '1kiNRZg', 'location', 'href', '2967980iFllcN', '25BqSpuf', '11hnHnxi', 
-            '37760hkjBGD', 'Enter the password:', 'Incorrect password. Access denied.', 
-            '1772sUaQBA', '231090rCOcxj', 'orders.html', '553rcypSV', '1293IdhbXZ', 
-            '485606NBzNxp', '2774889BebRnL', '4616820KOMNgz'
-        ];
     }
   </script>
 </body>
