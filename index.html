@@ -172,7 +172,6 @@
         
         const enteredPassword = prompt(passwordPrompt);
     if (enteredPassword === correctPassword) {
-        localStorage.setItem('authenticated')=true;
         window.location.href = 'orders.html';
         } else {
             alert('Incorrect password. Access denied.');
