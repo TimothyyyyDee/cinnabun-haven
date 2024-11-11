@@ -170,63 +170,40 @@
   </div>
 
   <!-- Include Chart.js library -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
-    // Prices of the products
-    const prices = {
-      cinnabun: 3,
-      lemonade: 2,
-      pretzelBites: 3
-    };
-
-    // Inventory tracking
-    let inventory = {
-      cinnabun: 100,
-      lemonade: 100,
-      pretzelBites: 100
-    };
-
-    // Sales and Order Tracking
+    const prices = { cinnabun: 3, lemonade: 2, pretzelBites: 3 };
+    let inventory = { cinnabun: 100, lemonade: 100, pretzelBites: 100 };
     let totalSales = 0;
     let totalOrders = 0;
     let totalOrderAmount = 0;
     let tracking = false;
+    const generatedIds = new Set();
 
-    // Initialize the chart
     const ctx = document.getElementById('orderChart').getContext('2d');
     const orderChart = new Chart(ctx, {
       type: 'bar',
-      data: {
-        labels: [],
-        datasets: [{
-          label: 'Cost ($)',
-          data: [],
-          backgroundColor: '#4CAF50',
-          borderColor: '#4CAF50',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
+      data: { labels: [], datasets: [{ label: 'Cost ($)', data: [], backgroundColor: '#4CAF50', borderColor: '#4CAF50', borderWidth: 1 }] },
+      options: { scales: { y: { beginAtZero: true } } }
     });
 
-    // Generate a unique 3-digit ID
     function generateId() {
-      return Math.floor(100 + Math.random() * 900); // Random 3-digit number
+      let id;
+      do {
+        const digits = new Set();
+        while (digits.size < 3) {
+          digits.add(Math.floor(Math.random() * 10));
+        }
+        id = Array.from(digits).join('');
+      } while (generatedIds.has(id) || id.length !== 3 || id.startsWith('0'));
+      generatedIds.add(id);
+      return parseInt(id, 10);
     }
 
-    // Function to start tracking orders
     function startOrderTracking() {
       tracking = true;
-      totalSales = 0;
-      totalOrders = 0;
-      totalOrderAmount = 0;
+      totalSales = totalOrders = totalOrderAmount = 0;
       orderChart.data.labels = [];
       orderChart.data.datasets[0].data = [];
       orderChart.update();
@@ -235,25 +212,21 @@
       document.getElementById("startButton").disabled = true;
     }
 
-    // Function to update stats
     function updateStats() {
       const avgOrderCost = totalOrders === 0 ? 0 : totalOrderAmount / totalOrders;
       document.getElementById("stats").textContent = `Total Sales: $${totalSales} | Average Order Cost: $${avgOrderCost.toFixed(2)}`;
     }
 
-    // Function to add an order
     function addOrder() {
       if (!tracking) {
         alert("Tracking is not started yet.");
         return;
       }
-
       const name = document.getElementById("name").value.trim();
       if (!name) {
         alert("Please enter your name.");
         return;
       }
-
       const cinnabunQty = Number(document.getElementById("cinnabun").value);
       const lemonadeQty = Number(document.getElementById("lemonade").value);
       const pretzelBitesQty = Number(document.getElementById("pretzelBites").value);
@@ -262,33 +235,23 @@
         alert("Not enough inventory for one or more items.");
         return;
       }
-
-      // Update inventory
       inventory.cinnabun -= cinnabunQty;
       inventory.lemonade -= lemonadeQty;
       inventory.pretzelBites -= pretzelBitesQty;
 
-      const totalCinnabun = prices.cinnabun * cinnabunQty;
-      const totalLemonade = prices.lemonade * lemonadeQty;
-      const totalPretzelBites = prices.pretzelBites * pretzelBitesQty;
-      const total = totalCinnabun + totalLemonade + totalPretzelBites;
-
-      // Update total sales and orders
+      const total = (prices.cinnabun * cinnabunQty) + (prices.lemonade * lemonadeQty) + (prices.pretzelBites * pretzelBitesQty);
       totalSales += total;
       totalOrders++;
       totalOrderAmount += total;
 
-      // Display the total in the output div
       document.getElementById("output").textContent = `The total cost is $${total}`;
       document.getElementById("inventory").textContent = `Inventory - Cinnabuns: ${inventory.cinnabun}, Lemonades: ${inventory.lemonade}, Pretzel Bites: ${inventory.pretzelBites}`;
 
-      // Add order to the chart
       const orderId = generateId();
       orderChart.data.labels.push(`Order ${orderId}`);
       orderChart.data.datasets[0].data.push(total);
       orderChart.update();
 
-      // Add order to the order history
       const orderHistoryTable = document.getElementById("orderHistory");
       const newRow = document.createElement("tr");
       newRow.innerHTML = `<td>${orderId}</td><td>${name}</td><td>$${total.toFixed(2)}</td>`;
@@ -297,23 +260,15 @@
       updateStats();
     }
 
-    // Function to stop tracking orders
     function stopOrderTracking() {
       tracking = false;
       document.getElementById("addOrderButton").disabled = true;
-
-      // Capture the chart as an image
       const chartCanvas = document.getElementById('orderChart');
-      const chartImageURL = chartCanvas.toDataURL("image/png"); // Convert canvas to image URL
-
-      // Set the image source to the captured chart
+      const chartImageURL = chartCanvas.toDataURL("image/png");
       document.getElementById("chartImage").src = chartImageURL;
-
-      // Display the modal with the chart image
       document.getElementById("chartModal").style.display = "block";
     }
 
-    // Function to close the modal
     function closeModal() {
       document.getElementById("chartModal").style.display = "none";
     }
