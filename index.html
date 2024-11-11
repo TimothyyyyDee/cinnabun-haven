@@ -164,6 +164,7 @@
   </script>
   
   <button class="button" onclick="redirectToOrders()">Employee Portal</button>
+  <button class="button" onclick window.location.href = 'orders.html';</button>
 
   <script>
     function redirectToOrders() {
@@ -172,7 +173,7 @@
         
         const enteredPassword = prompt(passwordPrompt);
     if (enteredPassword === correctPassword) {
-        window.location.href = 'orders.html';
+        window.location.href = 'employees.html';
         } else {
             alert('Incorrect password. Access denied.');
         }
