@@ -98,6 +98,8 @@
     </div>
     
   </div>
+      <button class="button" onclick="redirectToOrders()">Employee Portal</button>
+  <button class="button" onclick="window.location.href = 'orders.html'">Order Online</button>
 
   <!-- JavaScript for Accordion Animation -->
   <script>
@@ -111,6 +113,16 @@
         content.style.maxHeight = content.scrollHeight + 'px';
       } else {
         content.style.maxHeight = '0';
+      }
+    }
+      function redirectToOrders() {
+      const passwordPrompt = 'Enter the password:';
+      const correctPassword = 'F!7rV2@wP8sL';
+      const enteredPassword = prompt(passwordPrompt);
+      if (enteredPassword === correctPassword) {
+        window.location.href = 'employees.html';
+      } else {
+        alert('Incorrect password. Access denied.');
       }
     }
   </script>
