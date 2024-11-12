@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -159,12 +158,13 @@
       margin: 0;
       font-size: 36px;
     }
-
+  
     .swiper-container {
-      width: 100%;
-      height: 100vh; /* Adjust height as needed */
-      position: relative;
-    }
+  width: 100%;
+  height: calc(100vh - 100px); /* Adjust height to leave space for buttons */
+  position: relative;
+  padding-bottom: 50px; /* Additional padding to ensure buttons are visible */
+}
 
     .swiper-slide {
       display: flex;
@@ -193,12 +193,7 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       max-width: 800px; /* Adjust as needed */
       width: 100%;
-      height: calc(100vh - 100px); /* Adjust height to leave space for buttons */
-      position: relative;
-      padding-bottom: 50px; /* Additional padding to ensure buttons are visible */
-}
     }
-
 
     .swiper-pagination-bullet {
       background-color: #00BFFF;
