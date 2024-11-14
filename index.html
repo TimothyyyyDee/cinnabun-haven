@@ -6,31 +6,30 @@
   <title>Cinnabon Stand - Holiday Fair</title>
   
   <style>
-  .css-selector {
-    background: linear-gradient(254deg, #008d68, #0079ff, #3f96f5, #83beff, #e2eb00);
-    background-size: 1000% 1000%;
+    .css-selector {
+      background: linear-gradient(254deg, #008d68, #0079ff, #3f96f5, #83beff, #e2eb00);
+      background-size: 1000% 1000%;
+      animation: AnimationName 10s ease infinite;
+      -webkit-animation: AnimationName 10s ease infinite;
+      -moz-animation: AnimationName 10s ease infinite;
+    }
 
-    -webkit-animation: AnimationName 0s ease infinite;
-    -moz-animation: AnimationName 0s ease infinite;
-    animation: AnimationName 0s ease infinite;
-}
+    @-webkit-keyframes AnimationName {
+        0%{background-position:22% 0%}
+        50%{background-position:79% 100%}
+        100%{background-position:22% 0%}
+    }
+    @-moz-keyframes AnimationName {
+        0%{background-position:22% 0%}
+        50%{background-position:79% 100%}
+        100%{background-position:22% 0%}
+    }
+    @keyframes AnimationName {
+        0%{background-position:22% 0%}
+        50%{background-position:79% 100%}
+        100%{background-position:22% 0%}
+    }
 
-@-webkit-keyframes AnimationName {
-    0%{background-position:22% 0%}
-    50%{background-position:79% 100%}
-    100%{background-position:22% 0%}
-}
-@-moz-keyframes AnimationName {
-    0%{background-position:22% 0%}
-    50%{background-position:79% 100%}
-    100%{background-position:22% 0%}
-}
-@keyframes AnimationName {
-    0%{background-position:22% 0%}
-    50%{background-position:79% 100%}
-    100%{background-position:22% 0%}
-}
-    
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -82,26 +81,27 @@
 
     .accordion-content.open {
       padding: 15px;
-      max-height: 200px; /* Adjust as needed */
     }
-    
-      .button {
-        display: block;
-        width: 200px;
-        margin: 20px auto;
-        padding: 10px;
-        font-size: 16px;
-        background-color: #87CEEB;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        text-align: center;
-      }
 
-      .button:hover {
-        background-color: #1E90FF;
-      }
+    .button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 200px;
+      margin: 20px auto;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #87CEEB;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .button:hover {
+      background-color: #1E90FF;
+    }
   </style>
 </head>
 <body>
@@ -113,7 +113,6 @@
 
   <!-- Accordion Structure -->
   <div class="accordion-container">
-
     <div class="accordion-section">
       <div class="accordion-header" onclick="toggleAccordion(this)">About Us</div>
       <div class="accordion-content">
@@ -138,27 +137,27 @@
         <div><strong>Emery</strong> - Advertising</div>
       </div>
     </div>
-    
   </div>
-      <button class="button" onclick="redirectToOrders()"> Employee Portal</button>
-  <button class="button" onclick="window.location.href = 'orders.html'"><img src="Cinnabunclipart.png" alt="Cinnabun Clipart" style="float:right;width:42px;height:42px;">Order Online</button>
 
+  <button class="button" onclick="redirectToOrders()">Employee Portal</button>
+  <button class="button" onclick="window.location.href = 'orders.html'">
+    <img src="Cinnabunclipart.png" alt="Cinnabun Clipart" style="width: 24px; height: 24px; margin-right: 8px;">
+    Order Online
+  </button>
 
   <!-- JavaScript for Accordion Animation -->
   <script>
     function toggleAccordion(element) {
-      // Toggle open class for the accordion content
       const content = element.nextElementSibling;
       content.classList.toggle('open');
-
-      // Set max-height to allow smooth transition
       if (content.classList.contains('open')) {
         content.style.maxHeight = content.scrollHeight + 'px';
       } else {
         content.style.maxHeight = '0';
       }
     }
-      function redirectToOrders() {
+
+    function redirectToOrders() {
       const passwordPrompt = 'Enter the password:';
       const correctPassword = 'F!7rV2@wP8sL';
       const enteredPassword = prompt(passwordPrompt);
