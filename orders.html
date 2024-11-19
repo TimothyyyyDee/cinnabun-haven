@@ -67,13 +67,7 @@
         const customerName = document.getElementById("customerName").value;
         const customerEmail = document.getElementById("customerEmail").value;
         const orderItem = document.getElementById("orderItem").value;
-        const quantity = parseInt(document.getElementById("quantity").value);
-        
-        // Get price for the ordered item
-        const pricePerItem = itemPrices[orderItem];  // Fetch price based on item name
-        if (!pricePerItem) {
-          alert("Invalid item selected. Please choose a valid item.");
-          return;
+        const quantity = parseInt(document.getElementById("quantity").value)
         }
 
         const totalPrice = (quantity * pricePerItem).toFixed(2); // Calculate total price
