@@ -1,56 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <title>Order Form</title>
     <style>
-      body {
-        background-color: #FFFF00; /* Yellow */
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding: 20px;
-      }
-
-      h1 {
-        color: #333; /* Darker text color for contrast */
-      }
-
-      form {
-        display: inline-block;
-        text-align: left;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border-radius: 10px;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      label {
-        font-weight: bold;
-      }
-
-      input {
+      .button {
         display: block;
-        width: 100%;
-        margin-bottom: 15px;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-
-      button {
-        display: block;
-        width: 100%;
+        width: 200px;
+        margin: 20px auto;
         padding: 10px;
-        background-color: #808080; /* Gray */
-        color: white;
         font-size: 16px;
+        background-color: #808080; /* Sky blue */
+        color: white;
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        text-align: center;
       }
 
-      button:hover {
-        background-color: #000000; /* Black */
+      body {
+        background-color: #FFFF00; /* Yellow */
+      }
+
+      .button:hover {
+        background-color: #000000; /* Dodger Blue */
       }
     </style>
   </head>
@@ -58,35 +29,38 @@
     <h1>Place Your Order</h1>
     <form id="orderForm">
       <label for="customerName">Name:</label>
-      <input type="text" id="customerName" name="customerName" required />
+      <input type="text" id="customerName" name="customerName" required><br><br>
 
       <label for="customerEmail">Email:</label>
-      <input type="email" id="customerEmail" name="customerEmail" required />
+      <input type="email" id="customerEmail" name="customerEmail" required><br><br>
 
       <label for="orderItem">Order Item:</label>
-      <input type="text" id="orderItem" name="orderItem" required />
+      <input type="text" id="orderItem" name="orderItem" required><br><br>
 
       <label for="quantity">Quantity:</label>
-      <input type="number" id="quantity" name="quantity" min="1" required />
-
-      <label for="pricePerItem">Price per Item:</label>
-      <input type="number" id="pricePerItem" name="pricePerItem" min="0" step="0.01" required />
+      <input type="number" id="quantity" name="quantity" min="1" required><br><br>
 
       <button type="submit">Place Order</button>
     </form>
-
-    <button class="button" onclick="window.location.href = 'index.html'">Return Home</button>
 
     <!-- EmailJS Script -->
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
       // Initialize EmailJS
-      (function () {
+      (function() {
         emailjs.init("wcesjZYj6N6qfojAK"); // Replace with your EmailJS public key
       })();
 
+      // Price list (You can customize this as needed)
+      const itemPrices = {
+        "Item 1": 10.00,  // Set your predefined price here
+        "Item 2": 15.00,  // Another item with its price
+        "Item 3": 20.00   // Another item with its price
+        // Add more items as needed
+      };
+
       // Attach the form submit event listener
-      document.getElementById("orderForm").addEventListener("submit", function (event) {
+      document.getElementById("orderForm").addEventListener("submit", function(event) {
         event.preventDefault(); // Prevent default form submission
 
         // Collect form data
@@ -94,7 +68,14 @@
         const customerEmail = document.getElementById("customerEmail").value;
         const orderItem = document.getElementById("orderItem").value;
         const quantity = parseInt(document.getElementById("quantity").value);
-        const pricePerItem = parseFloat(document.getElementById("pricePerItem").value);
+        
+        // Get price for the ordered item
+        const pricePerItem = itemPrices[orderItem];  // Fetch price based on item name
+        if (!pricePerItem) {
+          alert("Invalid item selected. Please choose a valid item.");
+          return;
+        }
+
         const totalPrice = (quantity * pricePerItem).toFixed(2); // Calculate total price
         const timestamp = new Date().toLocaleString(); // Generate timestamp
 
@@ -114,7 +95,6 @@
           .send("service_as9vhx8", "template_ek99czq", templateParams)
           .then(() => {
             alert("Order placed successfully!");
-            document.getElementById("orderForm").reset(); // Reset the form
           })
           .catch((error) => {
             console.error("Error sending order notification:", error);
