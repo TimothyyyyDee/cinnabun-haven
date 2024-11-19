@@ -2,7 +2,7 @@
 <html>
   <head>
     <style>
-         body {
+      body {
         background-color: #FFFF00; /* Yellow */
         font-family: Arial, sans-serif;
         text-align: center;
@@ -49,7 +49,8 @@
 
       button:hover {
         background-color: #000000; /* Black */
-        </style>
+      }
+    </style>
   </head>
   <body>
     <h1>Place Your Order</h1>
@@ -93,10 +94,18 @@
         const customerName = document.getElementById("customerName").value;
         const customerEmail = document.getElementById("customerEmail").value;
         const orderItem = document.getElementById("orderItem").value;
-        const quantity = parseInt(document.getElementById("quantity").value)
+        const quantity = parseInt(document.getElementById("quantity").value);
+
+        // Retrieve the price for the selected item
+        const pricePerItem = itemPrices[orderItem];
+        
+        if (!pricePerItem) {
+          alert("Invalid item selected. Please choose a valid item.");
+          return; // Exit if the item is invalid
         }
 
-        const totalPrice = (quantity * pricePerItem).toFixed(2); // Calculate total price
+        // Calculate the total price
+        const totalPrice = (quantity * pricePerItem).toFixed(2);
         const timestamp = new Date().toLocaleString(); // Generate timestamp
 
         // EmailJS template parameters
