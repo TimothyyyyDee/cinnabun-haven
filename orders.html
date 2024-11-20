@@ -56,85 +56,90 @@
     <h1>Place Your Order</h1>
     <form id="orderForm">
       <label for="customerName">Name:</label>
-      <input type="text" id="customerName" name="customerName" required><br><br>
+      <input type="text" id="customerName" name="customerName" required>
 
       <label for="customerEmail">Email:</label>
-      <input type="email" id="customerEmail" name="customerEmail" required><br><br>
+      <input type="email" id="customerEmail" name="customerEmail" required>
 
-        <label for="orderItem">Order Item:</label>
-        <select id="orderItem" name="orderItem" required>
-        <option value="">-- Select an Item --</option>
-        <option value="Cinnabun">Cinnabun</option>
-        <option value="Pretzel Bites">Pretzel Bites</option>
-        <option value="Lemonade">Lemonade</option>
-        </select>
-      
-      <label for="quantity">Quantity:</label>
-      <input type="number" id="quantity" name="quantity" min="1" required><br><br>
+      <div>
+        <label for="cinnabuns">Cinnabuns:</label>
+        <input type="number" id="cinnabuns" name="cinnabuns" min="0" value="0">
+      </div>
+      <div>
+        <label for="pretzelBites">Pretzel Bites:</label>
+        <input type="number" id="pretzelBites" name="pretzelBites" min="0" value="0">
+      </div>
+      <div>
+        <label for="lemonade">Lemonade:</label>
+        <input type="number" id="lemonade" name="lemonade" min="0" value="0">
+      </div>
 
       <button type="submit">Place Order</button>
     </form>
-    <script>
-        document.getElementById("orderForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // This prevents the default form submission
-    // Your form handling logic here
-    alert("Form submitted!");
-  });
-</script>
-    </script>
+
     <!-- EmailJS Script -->
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
       // Initialize EmailJS
-      (function() {
-        emailjs.init("tpsFAPhdXh1ekaHzy"); // Replace with your EmailJS public key
-      })();
+      emailjs.init("your_user_id");
 
-      // Price list (You can customize this as needed)
+      // Price list
       const itemPrices = {
-        "Cinnabun": 3.00,
-        "Pretzel Bites": 2.00,  
-        "Lemonade": 2.00   
-        // Add more items as needed
+        cinnabuns: 3.0,
+        pretzelBites: 2.0,
+        lemonade: 2.0
       };
 
-      // Attach the form submit event listener
-      document.getElementById("orderForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent default form submission
+      // Attach form submission listener
+      document.getElementById("orderForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent form submission
 
-        // Collect form data
+        // Get customer details
         const customerName = document.getElementById("customerName").value;
         const customerEmail = document.getElementById("customerEmail").value;
-        const orderItem = document.getElementById("orderItem").value;
-        const quantity = parseInt(document.getElementById("quantity").value);
 
-        // Retrieve the price for the selected item
-        const pricePerItem = itemPrices[orderItem];
-        
-        if (!pricePerItem) {
-          alert("Invalid item selected. Please choose a valid item.");
-          return; // Exit if the item is invalid
+        // Get product quantities
+        const cinnabunsQty = parseInt(document.getElementById("cinnabuns").value) || 0;
+        const pretzelBitesQty = parseInt(document.getElementById("pretzelBites").value) || 0;
+        const lemonadeQty = parseInt(document.getElementById("lemonade").value) || 0;
+
+        // Calculate totals
+        const cinnabunsTotal = cinnabunsQty * itemPrices.cinnabuns;
+        const pretzelBitesTotal = pretzelBitesQty * itemPrices.pretzelBites;
+        const lemonadeTotal = lemonadeQty * itemPrices.lemonade;
+
+        const grandTotal = (cinnabunsTotal + pretzelBitesTotal + lemonadeTotal).toFixed(2);
+
+        // Check if any items were ordered
+        if (grandTotal <= 0) {
+          alert("Please select at least one item.");
+          return;
         }
 
-        // Calculate the total price
-        const totalPrice = (quantity * pricePerItem).toFixed(2);
-        const timestamp = new Date().toLocaleString(); // Generate timestamp
+        // Create order summary
+        const orderSummary = `
+          Order Summary:
+          - Cinnabuns: ${cinnabunsQty} ($${cinnabunsTotal.toFixed(2)})
+          - Pretzel Bites: ${pretzelBitesQty} ($${pretzelBitesTotal.toFixed(2)})
+          - Lemonade: ${lemonadeQty} ($${lemonadeTotal.toFixed(2)})
+          --------------------
+          Total: $${grandTotal}
+        `;
 
         // EmailJS template parameters
         const templateParams = {
           customer_name: customerName,
           customer_email: customerEmail,
-          order_item: orderItem,
-          order_quantity: quantity,
-          total_price: totalPrice,
-          order_id: Math.floor(Math.random() * 1000000), // Generate a random order ID
+          order_summary: orderSummary,
+          total_price: grandTotal,
+          order_id: Math.floor(Math.random() * 1000000) // Random order ID
         };
 
         // Send email using EmailJS
         emailjs
           .send("service_as9vhx8", "template_ek99czq", templateParams)
           .then(() => {
-            alert("Order placed successfully!");
+            alert("Order placed successfully!\n" + orderSummary);
           })
           .catch((error) => {
             console.error("Error sending order notification:", error);
