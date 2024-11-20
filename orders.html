@@ -2,56 +2,95 @@
 <html>
   <head>
     <style>
-      body {
-        background-color: #FFFF00; /* Yellow */
-        font-family: Times New Roman, sans-serif;
-        text-align: center;
-        padding: 20px;
-      }
+  body {
+    background-color: #f0f8ff; /* Light blue for a softer background */
+    font-family: 'Arial', sans-serif; /* Cleaner font */
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    color: #333; /* Consistent text color */
+  }
 
-      h1 {
-        color: #333; /* Darker text color for contrast */
-      }
+  h1 {
+    color: #444; /* Slightly darker for better contrast */
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
 
-      form {
-        display: inline-block;
-        text-align: center;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border-radius: 10px;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      }
+  form {
+    display: inline-block;
+    text-align: left; /* Align form elements naturally */
+    padding: 25px;
+    background-color: #ffffff; /* White background for contrast */
+    border-radius: 12px;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15); /* Softer shadow for depth */
+    max-width: 400px;
+    width: 100%; /* Ensure responsiveness */
+  }
 
-      label {
-        font-weight: bold;
-      }
+  label {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #555; /* Neutral color for labels */
+  }
 
-      input {
-        display: block;
-        width: 100%;
-        margin-bottom: 15px;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
+  input {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc; /* Subtle border for input fields */
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Prevent overflow issues */
+    background-color: #fdfdfd; /* Slightly off-white for better visibility */
+  }
 
-      button {
-        display: block;
-        width: 100%;
-        padding: 10px;
-        background-color: #808080; /* Gray */
-      
-        color: white;
-        font-size: 16px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
+  input:focus {
+    border-color: #007BFF; /* Highlight on focus */
+    outline: none;
+    box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+  }
 
-      button:hover {
-        background-color: #000000; /* Black */
-      }
-    </style>
+  button {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #007BFF; /* Blue for a more inviting button */
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: scale(1.05); /* Slight enlargement for feedback */
+  }
+
+  button:active {
+    background-color: #003f7f; /* Even darker blue when clicked */
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    body {
+      padding: 15px;
+    }
+
+    form {
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 1.8em;
+    }
+  }
+</style>
   </head>
   <body>
     <h1>Place Your Order</h1>
